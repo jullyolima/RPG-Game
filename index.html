@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Valador</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="container d-flex">
+
+        <!-- Left Panel/Character Info -->
+        <div class="left">
+            <div class="panel combat home header">
+                <h5 id="left-header" class="header-text">Character</h5>
+            </div>
+
+            <div id="character" class="panel combat home">
+                <p id="p-level-text"></p>
+                <p id="p-xp-text"></p>
+                <p id="p-health-text"></p>
+            </div>
+
+            <div class="panel combat home header">
+                    <h5 class="header-text">Stats</h5>
+            </div>
+
+            <div id="player-stats" class="panel combat home">
+                <p id="p-stamina-text"></p>
+                <p id="p-strength-text"></p>
+            </div>
+        </div>
+
+        <!-- Middle Panel/Menus,Actions,Text -->
+        <div class="middle">
+
+            <div class="panel combat home header">
+                <h5 id="middle-header" class="header-text"></h5>
+            </div>
+
+            <!-- Buttons -->
+            <div id="buttonContainer">
+
+            <span class="panel combat actions">
+                <button class="btn btn-primary attackBtn">Attack</button>
+            </span>
+
+            <span class="panel actions eatBtnContainer">
+                <button class="btn btn-primary eatBtn">Eat Meat</button>
+            </span>
+
+            <span class="panel home actions">
+                <button class="btn btn-primary huntingBtn">Go Hunting</button>
+            </span>
+
+            <span class="panel actions backButton">
+                <button class="btn btn-primary campBtn">Back To Camp</button>
+            </span>
+            
+            </div>
+
+            <!-- Textbox -->
+            <div class="panel combat home textbox">
+                <p id="textbox-text"></p>
+            </div>
+        </div>
+
+        <!-- Right Panel/Enemy Info, Inventory -->
+        <div class="right">
+
+            <div class="panel combat home header">
+                <h5 id="right-header" class="header-text"></h5>
+            </div>
+            
+            <div id="enemy" class="panel combat">
+                <p id="e-name-text"></p>
+                <p id="e-level-text"></p>
+                <p id="e-health-text"></p>
+            </div>
+
+            <div class="panel combat header">
+                <h5 class="header-text">Stats</h5>
+            </div>
+
+            <div id="enemy-stats" class="panel combat">
+                <p id="e-stamina-text"></p>
+                <p id="e-strength-text"></p>
+            </div>
+
+            <div class="panel home inventory">
+                <p class="gold-text"></p>
+                <p class="inv-text"></p>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="assets/javascript/player.js"></script>
+    <script src="assets/javascript/enemies.js"></script>
+    <script src="assets/javascript/game.js"></script>
+</body>
+
+</html>
