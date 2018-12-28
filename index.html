@@ -16,21 +16,22 @@
 
         <!-- Left Panel/Character Info -->
         <div class="left">
-            <div class="panel combat home header">
+            <div class="panel combat home building header">
                 <h5 id="left-header" class="header-text">Character</h5>
             </div>
 
-            <div id="character" class="panel combat home">
+            <div id="character" class="panel combat building home">
                 <p id="p-level-text"></p>
                 <p id="p-xp-text"></p>
                 <p id="p-health-text"></p>
+                <p id="p-energy-text"></p>
             </div>
 
-            <div class="panel combat home header">
+            <div class="panel combat home building header">
                     <h5 class="header-text">Stats</h5>
             </div>
 
-            <div id="player-stats" class="panel combat home">
+            <div id="player-stats" class="panel combat building home">
                 <p id="p-stamina-text"></p>
                 <p id="p-strength-text"></p>
             </div>
@@ -39,12 +40,18 @@
         <!-- Middle Panel/Menus,Actions,Text -->
         <div class="middle">
 
-            <div class="panel combat home header">
+            <div class="panel combat home building header">
                 <h5 id="middle-header" class="header-text"></h5>
             </div>
 
             <!-- Buttons -->
             <div id="buttonContainer">
+
+            <!-- Building Info -->
+            <div class="panel building buildingInfo">
+                <p class="buildinglvl-text"> </p>
+                <p class="buildingoutput-text"> </p>
+            </div>
 
             <span class="panel combat actions">
                 <button class="btn btn-primary attackBtn">Attack</button>
@@ -58,14 +65,40 @@
                 <button class="btn btn-primary huntingBtn">Go Hunting</button>
             </span>
 
-            <span class="panel actions backButton">
+            <span class="panel home actions">
+                <button class="btn btn-primary goStoneBtn">Find Stone</button>
+            </span>
+
+            <span class="panel home actions">
+                <button class="btn btn-primary goWoodBtn">Find Wood</button>
+            </span>
+
+            <span class="panel stone actions">
+                <button class="btn btn-primary stoneBtn">Mine Stone</button>
+            </span>
+
+            <span class="panel wood actions">
+                <button class="btn btn-primary woodBtn">Cut Wood</button>
+            </span>
+
+            <!-- Upgrade Stone -->
+            <span class="panel stone actions">
+                <button class="btn btn-primary upgradeStoneBtn">Upgrade</button>
+            </span>
+
+            <!-- Upgrade Stone -->
+            <span class="panel wood actions">
+                <button class="btn btn-primary upgradeWoodBtn">Upgrade</button>
+            </span>
+
+            <span class="panel actions building backButton">
                 <button class="btn btn-primary campBtn">Back To Camp</button>
             </span>
-            
+
             </div>
 
             <!-- Textbox -->
-            <div class="panel combat home textbox">
+            <div class="panel combat home building textbox">
                 <p id="textbox-text"></p>
             </div>
         </div>
@@ -92,7 +125,7 @@
                 <p id="e-strength-text"></p>
             </div>
 
-            <div class="panel home inventory">
+            <div class="panel home building inventory">
                 <p class="gold-text"></p>
                 <p class="inv-text"></p>
 
@@ -106,6 +139,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+    <script src="assets/javascript/items.js"></script>
     <script src="assets/javascript/player.js"></script>
     <script src="assets/javascript/enemies.js"></script>
     <script src="assets/javascript/game.js"></script>

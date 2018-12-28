@@ -43,7 +43,7 @@ p {
     margin-right:20px;
     margin-bottom:10px;
     margin-left:20px;
-    height:100px;
+    height:120px;
     border-radius: 20px;
     border: rgb(114, 74, 15) 5px ridge;  
       
@@ -69,13 +69,71 @@ p {
     
 }
 
+.buildingInfo {
+    height:75px;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left:10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    background-color:wheat;
+    border: rgb(114, 74, 15) 5px ridge;
+}
+
+/* Container that holds all the buttons */
+#buttonContainer {
+    height:270px;
+    margin-top:10px;
+    margin-right:20px;
+    margin-bottom:10px;
+    margin-left:20px;
+    padding-top:10px;
+    padding-right:10px;
+    padding-bottom:10px;
+    background-color:wheat;
+    border: rgb(114, 74, 15) 5px ridge;
+}
+
+/* Actions/Buttons */
+.actions {
+    margin-top:10px;
+    margin-bottom:5px;
+    margin-left:10px;
+
+}
+
+.btn-primary {
+    background-color: rgb(114, 74, 15);
+    border: rgb(202, 159, 79) 5px ridge;
+    font-size:12px;
+}
+
+.btn-primary:hover {
+    background-color: rgb(114, 74, 15);
+    border: rgb(150, 143, 133) 5px ridge;
+    
+}
+
+/* Textbox Container */
+.textbox {
+    margin-top:10px;
+    margin-right:20px;
+    margin-bottom:10px;
+    margin-left:20px;
+    padding-top:5px;
+    padding-left:5px;
+    padding-right:5px;
+    background-color:wheat;
+    border: rgb(114, 74, 15) 5px ridge;
+}
+
 #enemy {
     background-color:wheat;
     margin-top:10px;
     margin-right:20px;
     margin-bottom:10px;
     margin-left:20px;
-    height:100px;
+    height:120px;
     border-radius: 20px;
     border: rgb(114, 74, 15) 5px ridge;  
       
@@ -104,13 +162,6 @@ p {
     text-align:center;
 }
 
-.actions {
-    height:400px;
-}
-
-.textbox {
-    margin-top:100px;
-}
 #textbox-text {
     overflow-y:auto;
     height:150px;

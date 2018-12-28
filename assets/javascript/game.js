@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    var chosenEnemy, randomDmg, randomDmgFlag, randomDmgRange, rawDmg, totalDmg, percentOfXpLost, percentOfGoldLost;
+    var chosenEnemy, randomDmg, randomDmgFlag, randomDmgRange, rawDmg, totalDmg, percentOfXpLost, percentOfGoldLost,
+        stoneOutput;
 
     var levels = [0, 150, 650, 1200, 1800, 3000, 5000, 8000]
 
@@ -31,6 +32,42 @@ $(document).ready(function () {
         $("#middle-header").html("Combat");
     }
 
+    //sets the scene to stone quarry
+    goStone = function () {
+        $(".panel").hide();
+        $(".building").show();
+        $("#middle-header").html("Stone Quarry");
+        $(".stone").show();
+        $(".buildinglvl-text").html("Building Lvl: " + player.stoneLvl);
+        if (player.stoneLvl === 1) {
+            $(".buildingoutput-text").html("Building Output: 1-2")
+        }
+        if (player.stoneLvl === 2) {
+            $(".buildingoutput-text").html("Building Output: 1-6")
+        }
+        if (player.stoneLvl === 3) {
+            $(".buildingoutput-text").html("Building Output: 1-12")
+        }
+    }
+
+    //sets the scene to wood cutters
+    goWood = function () {
+        $(".panel").hide();
+        $(".building").show();
+        $("#middle-header").html("Woodcutter's Hut");
+        $(".wood").show();
+        $(".buildinglvl-text").html("Building Lvl: " + player.woodLvl);
+        if (player.woodLvl === 1) {
+            $(".buildingoutput-text").html("Building Output: 1-2")
+        }
+        if (player.woodLvl === 2) {
+            $(".buildingoutput-text").html("Building Output: 1-6")
+        }
+        if (player.woodLvl === 3) {
+            $(".buildingoutput-text").html("Building Output: 1-12")
+        }
+    }
+
     //sets inventory info
     setInvInfo = function () {
         $(".inv-text").empty();
@@ -49,6 +86,8 @@ $(document).ready(function () {
             player.level++
             player.maxHealth = player.maxHealth + player.level * 20;
             player.health = player.maxHealth;
+            player.maxEnergy++
+            player.energy = player.maxEnergy;
             $("#textbox-text").prepend("You leveled up!" + "<br>")
         }
     }
@@ -58,6 +97,7 @@ $(document).ready(function () {
         $("#p-level-text").html("Lv: " + player.level);
         $("#p-xp-text").html("Exp: " + player.xp + "/" + levels[player.level])
         $("#p-health-text").html("Health: " + player.health + "/" + player.maxHealth);
+        $("#p-energy-text").html("Energy: " + player.energy + "/" + player.maxEnergy);
         $("#p-stamina-text").html("Stamina: " + player.stamina);
         $("#p-strength-text").html("Strength: " + player.strength);
     };
@@ -139,11 +179,12 @@ $(document).ready(function () {
         }
     }
 
-    checkIfKilledAnimal = function () {
+    //checks if the enemy has been killed
+    checkIfEnemyKilled = function (itemIndex) {
         if (chosenEnemy.health <= 0) {
             player.xp += chosenEnemy.xpReward;
-            player.inventory[0].qty += chosenEnemy.loot[0].drop;
-            $("#textbox-text").prepend("Loot: " + chosenEnemy.loot[0].name + " x" + chosenEnemy.loot[0].drop + "<br>");
+            player.inventory[itemIndex].qty += chosenEnemy.loot[itemIndex].drop;
+            $("#textbox-text").prepend("Loot: " + chosenEnemy.loot[itemIndex].name + " x" + chosenEnemy.loot[itemIndex].drop + "<br>");
             $("#textbox-text").prepend("You've gained " + chosenEnemy.xpReward + " Exp!" + "<br>");
             $("#textbox-text").prepend("You've killed the " + chosenEnemy.name + "!" + "<br>");
             $(".backButton").show();
@@ -152,6 +193,7 @@ $(document).ready(function () {
         }
     }
 
+    //checks if the player has been killed
     checkIfPlayedDied = function () {
         if (player.health <= 0) {
             setPlayerInfo();
@@ -171,6 +213,41 @@ $(document).ready(function () {
         }
     }
 
+    //checks the players stone level
+    checkStoneLvl = function () {
+        if (player.stoneLvl === 1) {
+            stoneOutput = Math.floor(Math.random() * 2) + 1;
+            player.inventory[1].qty += stoneOutput;
+        }
+        if (player.stoneLvl === 2) {
+            stoneOutput = Math.floor(Math.random() * 6) + 1;
+            player.inventory[1].qty += stoneOutput;
+        }
+        if (player.stoneLvl === 3) {
+            stoneOutput = Math.floor(Math.random() * 12) + 1;
+            player.inventory[1].qty += stoneOutput;
+        }
+
+
+    }
+
+    //checks the players stone level
+    checkWoodLvl = function () {
+        if (player.woodLvl === 1) {
+            woodOutput = Math.floor(Math.random() * 2) + 1;
+            player.inventory[2].qty += woodOutput;
+        }
+        if (player.woodLvl === 2) {
+            woodOutput = Math.floor(Math.random() * 6) + 1;
+            player.inventory[2].qty += woodOutput;
+        }
+        if (player.woodLvl === 3) {
+            woodOutput = Math.floor(Math.random() * 12) + 1;
+            player.inventory[2].qty += woodOutput;
+        }
+
+
+    }
 
 
 
@@ -189,6 +266,9 @@ $(document).ready(function () {
     //when the game is first booted
     goHome();
     setPlayerInfo();
+    $("#textbox-text").prepend("Your stomach grumbles...you're hungry!" + "<br>")
+    $("#textbox-text").prepend("You've woken up at your camp, with everything destroyed around you." + "<br>")
+
 
     //when you click on the go hunting button
     $(".huntingBtn").on("click", function () {
@@ -203,7 +283,7 @@ $(document).ready(function () {
         regPlayerAttack();
         setEnemyInfo();
         //checks if you killed the different group of enemies
-        checkIfKilledAnimal();
+        checkIfEnemyKilled(0);
         //checks if you leveled up
         checkIfLvldUp();
         //delay
@@ -223,21 +303,139 @@ $(document).ready(function () {
     $(".eatBtn").on("click", function () {
         //if player has meat in his inventory
         if (player.inventory[0].qty > 0) {
-        player.inventory[0].qty -= 1;
-        player.health += 30
-        if (player.health > player.maxHealth) {
-            player.health = player.maxHealth;
-        }
-        setPlayerInfo();
-        setInvInfo();
+            player.inventory[0].qty -= 1;
+            player.health += 30;
+            player.energy += 1;
+            if (player.health > player.maxHealth) {
+                player.health = player.maxHealth;
+            }
+            if (player.energy > player.maxEnergy) {
+                player.energy = player.maxEnergy;
+            }
+            setPlayerInfo();
+            setInvInfo();
         }
         else {
-        $("#textbox-text").prepend("You don't have any meat left!" + "<br>");
-        setInvInfo();    
-        }   
+            $("#textbox-text").prepend("You don't have any meat left!" + "<br>");
+            setInvInfo();
+        }
     });
 
+    //go to the quarry
+    $(".goStoneBtn").on("click", function () {
+        goStone();
+    });
 
+    //go to the woodcutters
+    $(".goWoodBtn").on("click", function () {
+        goWood();
+    });
+
+    //mine stone button
+    $(".stoneBtn").on("click", function () {
+        //if the player has 3 energy or more
+        if (player.energy >= 3) {
+            player.energy -= 3;
+            player.xp += player.level * 10;
+            checkStoneLvl();
+            $("#textbox-text").prepend("You mined " + stoneOutput + " stone!" + "<br>");
+        }
+        else {
+            $("#textbox-text").prepend("You don't have enough Energy!" + "<br>");
+        }
+        checkIfLvldUp();
+        setPlayerInfo();
+        setInvInfo();
+
+
+    });
+
+    //cut wood button
+    $(".woodBtn").on("click", function () {
+        //if the player has 2 energy or more
+        if (player.energy >= 2) {
+            player.energy -= 2;
+            player.xp += player.level * 8;
+            checkWoodLvl();
+            $("#textbox-text").prepend("You cut " + woodOutput + " wood!" + "<br>");
+        }
+        else {
+            $("#textbox-text").prepend("You don't have enough Energy!" + "<br>");
+        }
+        checkIfLvldUp();
+        setPlayerInfo();
+        setInvInfo();
+
+
+    });
+
+    //upgrade stone building
+    $(".upgradeStoneBtn").on("click", function () {
+        //upgrade to level 2
+        if (player.stoneLvl === 1) {
+            if (player.inventory[1].qty >= 15 && player.inventory[2].qty >= 10) {
+                player.stoneLvl = 2;
+                $("#textbox-text").prepend("Stone Quarry has been upgraded to level 2!" + "<br>");
+                goStone();
+                return
+            }
+            else {
+                $("#textbox-text").prepend("You need 15 stone and 10 wood to upgrade!" + "<br>");
+            }
+        }
+
+        //upgrade to level 3
+        if (player.stoneLvl === 2) {
+            if (player.inventory[1].qty >= 85 && player.inventory[2].qty >= 75) {
+                player.stoneLvl = 3;
+                $("#textbox-text").prepend("Stone Quarry has been upgraded to level 3!" + "<br>");
+                goStone();
+
+            }
+            else {
+                $("#textbox-text").prepend("You need 85 stone and 75 wood to upgrade!" + "<br>");
+            }
+        }
+
+        //hide if lvl 3
+        if (player.stoneLvl === 3) {
+            $(".upgradeStoneBtn").hide();
+        }
+    });
+
+    //upgrade wood building
+    $(".upgradeWoodBtn").on("click", function () {
+        //upgrade to level 2
+        if (player.woodLvl === 1) {
+            if (player.inventory[1].qty >= 15 && player.inventory[2].qty >= 10) {
+                player.woodLvl = 2;
+                $("#textbox-text").prepend("Woodcutter's Hut has been upgraded to level 2!" + "<br>");
+                goWood();
+                return
+            }
+            else {
+                $("#textbox-text").prepend("You need 15 stone and 10 wood to upgrade!" + "<br>");
+            }
+        }
+
+        //upgrade to level 3
+        if (player.woodLvl === 2) {
+            if (player.inventory[1].qty >= 85 && player.inventory[2].qty >= 75) {
+                player.woodLvl = 3;
+                $("#textbox-text").prepend("Woodcutter's Hut has been upgraded to level 3!" + "<br>");
+                goWood();
+
+            }
+            else {
+                $("#textbox-text").prepend("You need 85 stone and 75 wood to upgrade!" + "<br>");
+            }
+        }
+
+        //hide if lvl 3
+        if (player.woodLvl === 3) {
+            $(".upgradeWoodBtn").hide();
+        }
+    });
 
 
 
